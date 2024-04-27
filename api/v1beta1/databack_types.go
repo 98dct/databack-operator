@@ -23,19 +23,45 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
+type Origin struct {
+	Host string `json:"host"`
+	Port int32  `json:"port"`
+	//用户名和密码放在secret中
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type Destination struct {
+	EndPoint     string `json:"endPoint"`
+	AccessKey    string `json:"accessKey"`
+	AccessSecret string `json:"accessSecret"`
+	BucketName   string `json:"bucketName"`
+}
+
 // DatabackSpec defines the desired state of Databack
 type DatabackSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Databack. Edit databack_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	//是否开启备份任务
+	Enable bool `json:"enable"`
+	//备份时间
+	StartTime string `json:"startTime"`
+	//间隔周期(分钟)
+	Period int `json:"period"`
+	//数据源
+	Origin Origin `json:"origin"`
+	//备份的目标地址
+	Destination Destination `json:"destination"`
 }
 
 // DatabackStatus defines the observed state of Databack
 type DatabackStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+	Active           bool   `json:"active"`
+	NexTime          int64  `json:"nexTime"`
+	LastBackupResult string `json:"LastBackupResult"`
 }
 
 //+kubebuilder:object:root=true

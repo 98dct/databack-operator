@@ -5,4 +5,16 @@ metadata:
   namespace: "test"
 spec:
   # TODO(user): Add fields here
-  foo: "bar"
+  enable: true
+  startTime: "19:12"
+  period: 5
+  origin:
+    host: "192.168.8.200"
+    port: 30306
+    username: "root"
+    password: "123456"
+  destination:
+    endPoint: "192.168.8.200:30900"
+    accessKey: "Xmc1Kmqm20H62cu9U3KQ"
+    accessSecret: "PVsbWOFLlzEtYhX1ECT7SmRpdLSclNZ6yyminTLa"
+    bucketName: "mysqldata"
