@@ -97,6 +97,7 @@ func (r *DatabackReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 			logger.Sugar().Infof("%s 停止", req.Name)
 			//资源不存在说明被删除了，执行删除逻辑
 			r.DeleteQueue(databackK8s)
+			return ctrl.Result{}, nil
 		}
 		logger.Sugar().Infof("%s 异常 %v", req.Name, err)
 		return ctrl.Result{}, err
@@ -104,7 +105,7 @@ func (r *DatabackReconciler) Reconcile(ctx context.Context, req ctrl.Request) (c
 
 	if lastDataback, ok := r.BackupQueue[databackK8s.Name]; ok {
 		if equal := reflect.DeepEqual(databackK8s.Spec, lastDataback.Spec); equal {
-			return ctrl.Result{}, err
+			return ctrl.Result{}, nil
 		}
 	}
 
